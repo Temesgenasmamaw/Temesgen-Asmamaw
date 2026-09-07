@@ -96,7 +96,7 @@ class AuthHeaderSection extends StatelessWidget {
                             color: AppColors.white,
                             size: 18,
                           ),
-                          dropdownColor: AppColors.darkGreen,
+                          dropdownColor: AppColors.darkRed,
                           style: AppTextStyles.labelMedium.copyWith(
                             color: AppColors.white,
                           ),
@@ -134,7 +134,7 @@ class AuthHeaderSection extends StatelessWidget {
                       ),
                       child: const Icon(
                         Icons.account_balance_wallet,
-                        color: AppColors.primaryGreen,
+                        color: AppColors.safaricomRed,
                         size: 18,
                       ),
                     ),
@@ -206,6 +206,15 @@ class _ProfileSection extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             // User's name
+            // Welcome message
+            Text(
+              'Welcome back!',
+              style: AppTextStyles.bodySmall.copyWith(
+                color: AppColors.white.withValues(alpha: 0.85),
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+            const SizedBox(height: 2),
             Text(
               'Abebe Bekele',
               style: AppTextStyles.heading3.copyWith(
@@ -225,15 +234,6 @@ class _ProfileSection extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 4),
-
-            // Welcome message
-            Text(
-              'Welcome back!',
-              style: AppTextStyles.bodySmall.copyWith(
-                color: AppColors.white.withValues(alpha: 0.85),
-                fontWeight: FontWeight.w400,
-              ),
-            ),
           ],
         ),
       ],

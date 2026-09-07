@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -49,21 +50,42 @@ class ErrorHandler {
 
       case DioExceptionType.badResponse:
         final statusCode = error.response?.statusCode;
-        final data = error.response?.data;
+        final rawData = error.response?.data;
+        Map<String, dynamic>? data;
 
-        // Extract server message if available.
+        if (rawData is Map<String, dynamic>) {
+          data = rawData;
+        } else if (rawData is Map) {
+          data = Map<String, dynamic>.from(rawData);
+        } else if (rawData is String && rawData.isNotEmpty) {
+          try {
+            final decoded = jsonDecode(rawData);
+            if (decoded is Map<String, dynamic>) {
+              data = decoded;
+            } else if (decoded is Map) {
+              data = Map<String, dynamic>.from(decoded);
+            }
+          } catch (_) {}
+        }
+
+        // Extract server message directly from API response
         String serverMessage = fallbackMessage;
-        if (data is Map<String, dynamic>) {
+        if (data != null) {
+          final msg = data['message'] as String?;
           final err = data['error'];
-          if (err is Map<String, dynamic>) {
-            serverMessage = err['details'] as String? ??
-                err['message'] as String? ??
-                data['message'] as String? ??
-                fallbackMessage;
+          String? details;
+          if (err is Map) {
+            details = err['details'] as String? ?? err['message'] as String?;
           } else if (err is String) {
-            serverMessage = err;
-          } else if (data['message'] is String) {
-            serverMessage = data['message'] as String;
+            details = err;
+          }
+
+          if (msg != null && msg.isNotEmpty && details != null && details.isNotEmpty) {
+            serverMessage = '$msg: $details';
+          } else if (msg != null && msg.isNotEmpty) {
+            serverMessage = msg;
+          } else if (details != null && details.isNotEmpty) {
+            serverMessage = details;
           }
         }
 

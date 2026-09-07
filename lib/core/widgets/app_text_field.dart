@@ -5,6 +5,8 @@ import '../constants/app_colors.dart';
 import '../constants/app_sizes.dart';
 import '../constants/app_text_styles.dart';
 
+export 'custom_input.dart';
+
 /// Styled text field with label, hint, prefix/suffix icons, and error state.
 class AppTextField extends StatelessWidget {
   final String? label;
@@ -88,7 +90,7 @@ class AppTextField extends StatelessWidget {
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(AppSizes.radiusMedium),
               borderSide: const BorderSide(
-                color: AppColors.primaryGreen,
+                color: AppColors.safaricomRed,
                 width: 1.5,
               ),
             ),

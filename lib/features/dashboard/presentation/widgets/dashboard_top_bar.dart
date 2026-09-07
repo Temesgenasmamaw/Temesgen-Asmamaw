@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_sizes.dart';
@@ -17,7 +18,7 @@ class DashboardTopBar extends StatelessWidget implements PreferredSizeWidget {
   });
 
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight + 8);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 
   String _getInitials(String name) {
     final trimmed = name.trim();
@@ -36,17 +37,17 @@ class DashboardTopBar extends StatelessWidget implements PreferredSizeWidget {
       elevation: 0,
       surfaceTintColor: Colors.transparent,
       automaticallyImplyLeading: false,
-      titleSpacing: AppSizes.space20,
-      toolbarHeight: kToolbarHeight + 8,
+      titleSpacing: AppSizes.space16,
+      toolbarHeight: kToolbarHeight,
       title: Row(
         children: [
           // Initials Box Avatar (e.g. "AB")
           Container(
-            width: 44,
-            height: 44,
+            width: 38,
+            height: 38,
             decoration: BoxDecoration(
               color: const Color(0xFFE8F1FA),
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(10),
             ),
             alignment: Alignment.center,
             child: Text(
@@ -54,7 +55,7 @@ class DashboardTopBar extends StatelessWidget implements PreferredSizeWidget {
               style: const TextStyle(
                 color: Color(0xFF0A4C84),
                 fontWeight: FontWeight.bold,
-                fontSize: 16,
+                fontSize: 14,
                 letterSpacing: 0.5,
               ),
             ),
@@ -94,9 +95,9 @@ class DashboardTopBar extends StatelessWidget implements PreferredSizeWidget {
         // Notification Icon
         IconButton(
           icon: const Icon(
-            Icons.notifications_outlined,
+            Iconsax.notification,
             color: Color(0xFF0A4C84),
-            size: 26,
+            size: 24,
           ),
           tooltip: 'Notifications',
           onPressed: () {
@@ -126,7 +127,7 @@ class DashboardTopBar extends StatelessWidget implements PreferredSizeWidget {
               child: Row(
                 children: [
                   Icon(
-                    Icons.settings_outlined,
+                    Iconsax.setting_2,
                     size: 20,
                     color: AppColors.grey700,
                   ),
@@ -140,7 +141,7 @@ class DashboardTopBar extends StatelessWidget implements PreferredSizeWidget {
               child: Row(
                 children: [
                   Icon(
-                    Icons.help_outline,
+                    Iconsax.info_circle,
                     size: 20,
                     color: AppColors.grey700,
                   ),
@@ -155,7 +156,7 @@ class DashboardTopBar extends StatelessWidget implements PreferredSizeWidget {
               child: Row(
                 children: [
                   Icon(
-                    Icons.logout,
+                    Iconsax.logout,
                     size: 20,
                     color: AppColors.safaricomRed,
                   ),

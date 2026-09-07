@@ -7,7 +7,7 @@ import '../../../../core/constants/app_sizes.dart';
 import '../../../../core/constants/app_text_styles.dart';
 import '../../../../core/routes/app_router.dart';
 import '../../../../core/utils/toast_utils.dart';
-import '../../../../core/widgets/app_button.dart';
+import '../../../../core/widgets/custom_button.dart';
 import '../../../../core/widgets/pin_input_field.dart';
 import '../bloc/auth_bloc.dart';
 import '../bloc/auth_event.dart';
@@ -48,7 +48,9 @@ class _LoginPageState extends State<LoginPage> {
         } else if (state.status == AuthStatus.failure) {
           _pinKey.currentState?.clear();
           setState(() => _pin = '');
-          ToastUtils.showError(context, state.message ?? 'Incorrect PIN');
+          if (state.message != null && state.message!.isNotEmpty) {
+            ToastUtils.showError(context, state.message!);
+          }
         }
       },
       child: Scaffold(
@@ -107,7 +109,6 @@ class _LoginPageState extends State<LoginPage> {
                           },
                           onCompleted: (pin) {
                             setState(() => _pin = pin);
-                            _onContinue();
                           },
                         ),
 
@@ -125,8 +126,8 @@ class _LoginPageState extends State<LoginPage> {
                               const SizedBox(width: 6),
                               Flexible(
                                 child: Text(
-                                  state.message ??
-                                      'Incorrect PIN. Please try again.',
+                                  state.message ?? '',
+                                  textAlign: TextAlign.center,
                                   style: AppTextStyles.bodySmall.copyWith(
                                     color: AppColors.error,
                                     fontWeight: FontWeight.w500,
@@ -163,7 +164,7 @@ class _LoginPageState extends State<LoginPage> {
                         const SizedBox(height: AppSizes.space20),
 
                         // Primary Continue Button
-                        AppButton(
+                        CustomButton(
                           text: 'Continue',
                           isLoading: isLoading,
                           onPressed: (_pin.length == 4 && !isLoading)

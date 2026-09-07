@@ -4,6 +4,8 @@ import '../constants/app_colors.dart';
 import '../constants/app_sizes.dart';
 import '../constants/app_text_styles.dart';
 
+export 'custom_button.dart';
+
 /// Reusable primary action button with loading state.
 ///
 /// Supports primary (filled gradient), secondary, and outline variants.
@@ -34,7 +36,7 @@ class AppButton extends StatelessWidget {
         child: OutlinedButton(
           onPressed: isLoading ? null : onPressed,
           style: OutlinedButton.styleFrom(
-            side: const BorderSide(color: AppColors.primaryGreen, width: 1.5),
+            side: const BorderSide(color: AppColors.safaricomRed, width: 1.5),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(AppSizes.radiusMedium),
             ),
@@ -57,7 +59,7 @@ class AppButton extends StatelessWidget {
           boxShadow: onPressed != null && !isLoading
               ? [
                   BoxShadow(
-                    color: AppColors.primaryGreen.withValues(alpha: 0.3),
+                    color: AppColors.safaricomRed.withValues(alpha: 0.3),
                     blurRadius: 8,
                     offset: const Offset(0, 4),
                   ),
@@ -87,12 +89,12 @@ class AppButton extends StatelessWidget {
         width: 24,
         child: CircularProgressIndicator(
           strokeWidth: 2.5,
-          color: isOutlined ? AppColors.primaryGreen : AppColors.white,
+          color: isOutlined ? AppColors.safaricomRed : AppColors.white,
         ),
       );
     }
 
-    final textColor = isOutlined ? AppColors.primaryGreen : AppColors.white;
+    final textColor = isOutlined ? AppColors.safaricomRed : AppColors.white;
 
     if (prefixIcon != null) {
       return Row(

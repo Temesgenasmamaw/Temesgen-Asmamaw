@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 
 /// Curved Bottom Navigation Bar for Dashboard matching the reference design.
 class DashboardBottomNav extends StatelessWidget {
@@ -24,23 +25,23 @@ class DashboardBottomNav extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             _buildNavItem(
-              icon: Icons.home,
+              icon: Iconsax.home,
               label: 'Home',
               index: 0,
             ),
             _buildNavItem(
-              icon: Icons.receipt_long_outlined,
+              icon: Iconsax.receipt_2,
               label: 'History',
               index: 1,
             ),
             const SizedBox(width: 48), // Space for center docked QR button
             _buildNavItem(
-              icon: Icons.account_balance_wallet_outlined,
+              icon: Iconsax.wallet_2,
               label: 'Cards',
               index: 2,
             ),
             _buildNavItem(
-              icon: Icons.person_outline,
+              icon: Iconsax.user,
               label: 'Profile',
               index: 3,
             ),
@@ -122,7 +123,7 @@ class FloatingQrScannerButton extends StatelessWidget {
           customBorder: const CircleBorder(),
           child: const Center(
             child: Icon(
-              Icons.qr_code_scanner,
+              Iconsax.scan_barcode,
               size: 28,
               color: Color(0xFF38BDF8),
             ),

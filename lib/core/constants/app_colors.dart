@@ -5,13 +5,18 @@ class AppColors {
   AppColors._();
 
   // ── Brand Primary ──
+  static const Color safaricomRed = Color(0xFFE31937);
+  static const Color darkRed = Color(0xFFB3141B);
+  static const Color lightRed = Color(0xFFFFEBEE);
+  static const Color accentRed = Color(0xFFFF5252);
+  static const Color softRed = Color(0xFFD63B48);
+  static const Color softRedSurface = Color(0xFFFFF1F2);
   static const Color primaryGreen = Color(0xFF00A650);
   static const Color darkGreen = Color(0xFF006B3F);
   static const Color lightGreen = Color(0xFFE8F5E9);
   static const Color accentGreen = Color(0xFF4CAF50);
 
   // ── Brand Secondary ──
-  static const Color safaricomRed = Color(0xFFE31937);
   static const Color safaricomBlue = Color(0xFF1A73E8);
 
   // ── Neutrals ──
@@ -48,12 +53,12 @@ class AppColors {
   static const LinearGradient primaryGradient = LinearGradient(
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
-    colors: [primaryGreen, darkGreen],
+    colors: [safaricomRed, darkRed],
   );
 
   static const LinearGradient headerGradient = LinearGradient(
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
-    colors: [darkGreen, primaryGreen],
+    colors: [darkRed, safaricomRed],
   );
 }

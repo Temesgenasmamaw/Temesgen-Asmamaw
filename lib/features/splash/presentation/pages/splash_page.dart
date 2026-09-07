@@ -5,10 +5,6 @@ import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_text_styles.dart';
 import '../../../../core/routes/app_router.dart';
 
-/// Splash screen with Safaricom logo animation.
-///
-/// Displays a fade-in + scale animation over a green gradient background,
-/// then navigates to the login page after 2.5s.
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
 
@@ -30,13 +26,15 @@ class _SplashPageState extends State<SplashPage>
       duration: const Duration(milliseconds: 1500),
     );
 
-    _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeIn),
-    );
+    _fadeAnimation = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeIn));
 
-    _scaleAnimation = Tween<double>(begin: 0.6, end: 1.0).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.elasticOut),
-    );
+    _scaleAnimation = Tween<double>(
+      begin: 0.6,
+      end: 1.0,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.elasticOut));
 
     _controller.forward();
 
@@ -60,9 +58,7 @@ class _SplashPageState extends State<SplashPage>
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        decoration: const BoxDecoration(
-          gradient: AppColors.headerGradient,
-        ),
+        decoration: const BoxDecoration(gradient: AppColors.headerGradient),
         child: FadeTransition(
           opacity: _fadeAnimation,
           child: ScaleTransition(
@@ -89,7 +85,7 @@ class _SplashPageState extends State<SplashPage>
                     child: Icon(
                       Icons.account_balance_wallet,
                       size: 56,
-                      color: AppColors.primaryGreen,
+                      color: AppColors.safaricomRed,
                     ),
                   ),
                 ),

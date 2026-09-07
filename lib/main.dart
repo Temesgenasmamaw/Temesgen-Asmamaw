@@ -28,8 +28,8 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(
-            seedColor: AppColors.primaryGreen,
-            primary: AppColors.primaryGreen,
+            seedColor: AppColors.safaricomRed,
+            primary: AppColors.safaricomRed,
           ),
           scaffoldBackgroundColor: AppColors.scaffoldBackground,
           useMaterial3: true,

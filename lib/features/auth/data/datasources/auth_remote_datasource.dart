@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 
 import '../../../../core/errors/app_exception.dart';
@@ -30,9 +32,20 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       );
 
       final responseData = response.data;
-      final map = responseData is Map<String, dynamic>
-          ? responseData
-          : Map<String, dynamic>.from(responseData as Map);
+      Map<String, dynamic> map;
+      if (responseData is Map<String, dynamic>) {
+        map = responseData;
+      } else if (responseData is Map) {
+        map = Map<String, dynamic>.from(responseData);
+      } else if (responseData is String && responseData.isNotEmpty) {
+        final decoded = jsonDecode(responseData);
+        map = decoded is Map<String, dynamic>
+            ? decoded
+            : Map<String, dynamic>.from(decoded as Map);
+      } else {
+        map = {};
+      }
+
       final loginResponse = LoginResponseModel.fromJson(map);
 
       if (loginResponse.success && loginResponse.data != null) {
@@ -40,26 +53,45 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         return loginResponse.data!.user;
       }
 
+      final msg = loginResponse.message.isNotEmpty ? loginResponse.message : null;
+      final details = loginResponse.error?.details.isNotEmpty == true
+          ? loginResponse.error!.details
+          : null;
+      final errorMsg = (msg != null && details != null)
+          ? '$msg: $details'
+          : (msg ?? details ?? 'Authentication failed.');
+
       throw AppException(
-        message: loginResponse.message.isNotEmpty
-            ? loginResponse.message
-            : 'Authentication failed.',
+        message: errorMsg,
         code: loginResponse.error?.code ?? 'AUTH_FAILED',
       );
     } on DioException catch (e) {
       if (e.response?.data != null) {
         try {
           final data = e.response!.data;
-          final map = data is Map<String, dynamic>
-              ? data
-              : Map<String, dynamic>.from(data as Map);
+          Map<String, dynamic> map;
+          if (data is Map<String, dynamic>) {
+            map = data;
+          } else if (data is Map) {
+            map = Map<String, dynamic>.from(data);
+          } else if (data is String && data.isNotEmpty) {
+            final decoded = jsonDecode(data);
+            map = decoded is Map<String, dynamic>
+                ? decoded
+                : Map<String, dynamic>.from(decoded as Map);
+          } else {
+            map = {};
+          }
+
           final loginResponse = LoginResponseModel.fromJson(map);
-          final details = loginResponse.error?.details;
-          final errorMsg = (details != null && details.isNotEmpty)
-              ? details
-              : (loginResponse.message.isNotEmpty
-                  ? loginResponse.message
-                  : 'Invalid PIN. Please try again.');
+          final msg = loginResponse.message.isNotEmpty ? loginResponse.message : null;
+          final details = loginResponse.error?.details.isNotEmpty == true
+              ? loginResponse.error!.details
+              : null;
+          final errorMsg = (msg != null && details != null)
+              ? '$msg: $details'
+              : (msg ?? details ?? 'Authentication failed.');
+
           throw ServerException(
             message: errorMsg,
             code: loginResponse.error?.code ?? 'AUTH_FAILED',

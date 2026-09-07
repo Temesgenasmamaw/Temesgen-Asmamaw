@@ -10,21 +10,14 @@ import '../../../../core/widgets/balance_card.dart';
 import '../../../auth/presentation/bloc/auth_bloc.dart';
 import '../../../auth/presentation/bloc/auth_event.dart';
 import '../../../auth/presentation/bloc/auth_state.dart';
-import '../widgets/dashboard_bottom_nav.dart';
 import '../widgets/dashboard_top_bar.dart';
+import '../widgets/qr_scanner_fab.dart';
 import '../widgets/recent_transactions_section.dart';
 import '../widgets/services_grid.dart';
 
 /// Clean Dashboard Page assembling feature presentation widgets.
-class DashboardPage extends StatefulWidget {
+class DashboardPage extends StatelessWidget {
   const DashboardPage({super.key});
-
-  @override
-  State<DashboardPage> createState() => _DashboardPageState();
-}
-
-class _DashboardPageState extends State<DashboardPage> {
-  int _currentNavIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -52,35 +45,26 @@ class _DashboardPageState extends State<DashboardPage> {
             },
           ),
 
-          // ── Docked QR Scanner Button ──
-          floatingActionButton: FloatingQrScannerButton(
+          // ── Floating QR Scanner Button (Red Icon, No Bottom Nav) ──
+          floatingActionButton: QrScannerFab(
             onTap: () {
               ToastUtils.showInfo(context, 'QR Scanner activated');
             },
           ),
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerDocked,
-
-          // ── Curved Bottom Navigation Bar ──
-          bottomNavigationBar: DashboardBottomNav(
-            currentIndex: _currentNavIndex,
-            onNavItemSelected: (index) {
-              setState(() => _currentNavIndex = index);
-            },
-          ),
+          floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
 
           // ── Dashboard Body ──
           body: SingleChildScrollView(
             padding: const EdgeInsets.fromLTRB(
-              AppSizes.space20,
-              AppSizes.space12,
-              AppSizes.space20,
-              AppSizes.space40 + 60, // Extra bottom padding for docked FAB
+              AppSizes.space16,
+              AppSizes.space8,
+              AppSizes.space16,
+              AppSizes.space24,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                // 1. Balance Card
+                // 1. Balance Card (with Black Add Money Button)
                 BalanceCard(
                   balance: balance,
                   entireBalance: balance,
@@ -93,17 +77,17 @@ class _DashboardPageState extends State<DashboardPage> {
                   },
                 ),
 
-                const SizedBox(height: AppSizes.space24),
+                const SizedBox(height: 14),
 
-                // 2. Compact 3x3 Services Grid
+                // 2. Services Grid (Spacious, Soft Red Icons)
                 const ServicesGrid(),
 
-                const SizedBox(height: AppSizes.space24),
+                const SizedBox(height: 16),
 
                 // 3. Recent Transactions Section
                 const RecentTransactionsSection(),
 
-                const SizedBox(height: AppSizes.space20),
+                const SizedBox(height: AppSizes.space16),
               ],
             ),
           ),

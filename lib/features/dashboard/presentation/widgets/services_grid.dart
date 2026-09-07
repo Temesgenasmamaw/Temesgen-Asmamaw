@@ -1,96 +1,107 @@
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/utils/toast_utils.dart';
+import '../../../../core/widgets/custom_service_tile.dart';
 
-/// Ultra-compact 3x3 Services Grid for dashboard.
-///
-/// Uses direct Rows instead of GridView to strictly control row height,
-/// eliminating all extra vertical gaps and maximizing screen space for transactions.
-class ServicesGrid extends StatelessWidget {
+/// Services Grid with comfortable, generous spacing and a cohesive
+/// soft red palette ("red but not real red": rose-crimson #D63B48 on soft blush #FFF1F2).
+class ServicesGrid extends StatefulWidget {
   const ServicesGrid({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final services = [
-      const _ServiceConfig(
-        title: 'Fund\nTransfer',
-        icon: Icons.account_balance,
-        bgColor: Color(0xFFE8F1FA),
-        iconColor: Color(0xFF1E88E5),
-      ),
-      const _ServiceConfig(
-        title: 'Buy\nAirtime',
-        icon: Icons.phone_android,
-        bgColor: Color(0xFFFEF3C7),
-        iconColor: Color(0xFFF59E0B),
-      ),
-      const _ServiceConfig(
-        title: 'Exchange\nRate',
-        icon: Icons.account_balance_wallet,
-        bgColor: Color(0xFFE0F2FE),
-        iconColor: Color(0xFF0284C7),
-      ),
-      const _ServiceConfig(
-        title: 'Utility\nPayment',
-        icon: Icons.receipt_long,
-        bgColor: Color(0xFFE6F4EA),
-        iconColor: Color(0xFF0D9488),
-      ),
-      const _ServiceConfig(
-        title: 'Cash\nOut',
-        icon: Icons.local_atm,
-        bgColor: Color(0xFFFEE2E2),
-        iconColor: Color(0xFFEF4444),
-      ),
-      const _ServiceConfig(
-        title: 'Pay\nMerchant',
-        icon: Icons.shopping_bag_outlined,
-        bgColor: Color(0xFFF3E8FF),
-        iconColor: Color(0xFF9333EA),
-      ),
-      const _ServiceConfig(
-        title: 'Bank\nTransfer',
-        icon: Icons.swap_horiz,
-        bgColor: Color(0xFFEEF2FF),
-        iconColor: Color(0xFF6366F1),
-      ),
-      const _ServiceConfig(
-        title: 'Micro\nLoans',
-        icon: Icons.savings_outlined,
-        bgColor: Color(0xFFDCFCE7),
-        iconColor: Color(0xFF16A34A),
-      ),
-      const _ServiceConfig(
-        title: 'More\nServices',
-        icon: Icons.apps,
-        bgColor: Color(0xFFF3F4F6),
-        iconColor: Color(0xFF4B5563),
-      ),
-    ];
+  State<ServicesGrid> createState() => _ServicesGridState();
+}
 
+class _ServicesGridState extends State<ServicesGrid> {
+  bool _isExpanded = false;
+
+  // Refined soft red ("not real red") color constants
+  static const Color _softRed = AppColors.softRed;
+  static const Color _softRedBg = AppColors.softRedSurface;
+
+  final List<_ServiceConfig> _row1 = const [
+    _ServiceConfig(
+      title: 'Merchant\nPayment',
+      icon: Iconsax.shop,
+    ),
+    _ServiceConfig(
+      title: 'Bill\nPayment',
+      icon: Iconsax.receipt_2,
+    ),
+    _ServiceConfig(
+      title: 'Credit &\nSaving',
+      icon: Iconsax.empty_wallet,
+    ),
+  ];
+
+  final List<_ServiceConfig> _row2 = const [
+    _ServiceConfig(
+      title: 'Transfer\nMoney',
+      icon: Iconsax.money_send,
+    ),
+    _ServiceConfig(
+      title: 'Airtime /\nPackage',
+      icon: Iconsax.mobile,
+    ),
+    _ServiceConfig(
+      title: 'More\nServices',
+      icon: Iconsax.category,
+      isMoreAction: true,
+    ),
+  ];
+
+  final List<_ServiceConfig> _row3 = const [
+    _ServiceConfig(
+      title: 'Bank\nTransfer',
+      icon: Iconsax.bank,
+    ),
+    _ServiceConfig(
+      title: 'Cash\nOut',
+      icon: Iconsax.money_change,
+    ),
+    _ServiceConfig(
+      title: 'Exchange\nRate',
+      icon: Iconsax.convert,
+    ),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
       decoration: BoxDecoration(
         color: AppColors.white,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(18),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.04),
-            blurRadius: 10,
-            offset: const Offset(0, 3),
+            blurRadius: 14,
+            offset: const Offset(0, 4),
           ),
         ],
       ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          _buildRow(context, services.sublist(0, 3)),
-          const SizedBox(height: 8), // Minimized gap between Row 1 and Row 2
-          _buildRow(context, services.sublist(3, 6)),
-          const SizedBox(height: 8), // Minimized gap between Row 2 and Row 3
-          _buildRow(context, services.sublist(6, 9)),
-        ],
+      child: AnimatedSize(
+        duration: const Duration(milliseconds: 250),
+        curve: Curves.easeInOut,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // Row 1: Merchant Payment, Bill Payment, Credit & Saving
+            _buildRow(context, _row1),
+            const SizedBox(height: 14), // Generous space between rows
+
+            // Row 2: Transfer Money, Airtime/Package, More Services
+            _buildRow(context, _row2),
+
+            // Optional Row 3: Bank Transfer, Cash Out, Exchange Rate (when expanded)
+            if (_isExpanded) ...[
+              const SizedBox(height: 14),
+              _buildRow(context, _row3),
+            ],
+          ],
+        ),
       ),
     );
   }
@@ -101,44 +112,27 @@ class ServicesGrid extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: rowServices.map((item) {
         return Expanded(
-          child: InkWell(
+          child: CustomServiceTile(
+            title: item.title,
+            icon: item.icon,
+            iconColor: _softRed,
+            bgColor: _softRedBg,
+            tileSize: 46,
+            iconSize: 22,
             onTap: () {
-              ToastUtils.showInfo(
-                context,
-                '${item.title.replaceAll('\n', ' ')} selected',
-              );
+              if (item.isMoreAction) {
+                setState(() => _isExpanded = !_isExpanded);
+                ToastUtils.showInfo(
+                  context,
+                  _isExpanded ? 'All services expanded' : 'Services collapsed',
+                );
+              } else {
+                ToastUtils.showInfo(
+                  context,
+                  '${item.title.replaceAll('\n', ' ')} selected',
+                );
+              }
             },
-            borderRadius: BorderRadius.circular(10),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 2),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Container(
-                    width: 44,
-                    height: 44,
-                    decoration: BoxDecoration(
-                      color: item.bgColor,
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    alignment: Alignment.center,
-                    child: Icon(item.icon, color: item.iconColor, size: 22),
-                  ),
-                  const SizedBox(height: 3),
-                  Text(
-                    item.title,
-                    textAlign: TextAlign.center,
-                    maxLines: 2,
-                    style: const TextStyle(
-                      fontSize: 10.5,
-                      fontWeight: FontWeight.w500,
-                      color: AppColors.grey800,
-                      height: 1.1,
-                    ),
-                  ),
-                ],
-              ),
-            ),
           ),
         );
       }).toList(),
@@ -149,13 +143,11 @@ class ServicesGrid extends StatelessWidget {
 class _ServiceConfig {
   final String title;
   final IconData icon;
-  final Color bgColor;
-  final Color iconColor;
+  final bool isMoreAction;
 
   const _ServiceConfig({
     required this.title,
     required this.icon,
-    required this.bgColor,
-    required this.iconColor,
+    this.isMoreAction = false,
   });
 }
