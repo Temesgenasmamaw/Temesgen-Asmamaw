@@ -73,7 +73,7 @@ class _BalanceCardState extends State<BalanceCard> {
 
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
       decoration: BoxDecoration(
         gradient: AppColors.primaryGradient,
         borderRadius: BorderRadius.circular(AppSizes.radiusLarge),
@@ -101,12 +101,13 @@ class _BalanceCardState extends State<BalanceCard> {
                   children: [
                     Text(
                       'Main Balance',
-                      style: AppTextStyles.bodySmall.copyWith(
-                        color: AppColors.white.withValues(alpha: 0.85),
+                      style: AppTextStyles.bodyMedium.copyWith(
+                        color: AppColors.white.withValues(alpha: 0.88),
                         fontWeight: FontWeight.w500,
+                        fontSize: 13,
                       ),
                     ),
-                    const SizedBox(height: 2),
+                    const SizedBox(height: 4),
                     AnimatedSwitcher(
                       duration: const Duration(milliseconds: 250),
                       transitionBuilder: (child, animation) =>
@@ -118,13 +119,13 @@ class _BalanceCardState extends State<BalanceCard> {
                             ? AppTextStyles.heading1.copyWith(
                                 color: AppColors.white,
                                 fontWeight: FontWeight.bold,
-                                fontSize: 20,
+                                fontSize: 24,
                               )
                             : AppTextStyles.heading1.copyWith(
                                 color: AppColors.white,
                                 fontWeight: FontWeight.bold,
-                                fontSize: 22,
-                                letterSpacing: 3.0,
+                                fontSize: 26,
+                                letterSpacing: 4.0,
                               ),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
@@ -144,8 +145,8 @@ class _BalanceCardState extends State<BalanceCard> {
                   borderRadius: BorderRadius.circular(AppSizes.radiusCircular),
                   child: Container(
                     padding: const EdgeInsets.symmetric(
-                      horizontal: 12,
-                      vertical: 6,
+                      horizontal: 14,
+                      vertical: 7,
                     ),
                     decoration: BoxDecoration(
                       color: AppColors.black,
@@ -185,7 +186,7 @@ class _BalanceCardState extends State<BalanceCard> {
             ],
           ),
 
-          const SizedBox(height: 8),
+          const SizedBox(height: 12),
 
           // ── DIVIDER LINE ──
           Divider(
@@ -194,7 +195,7 @@ class _BalanceCardState extends State<BalanceCard> {
             thickness: 1,
           ),
 
-          const SizedBox(height: 8),
+          const SizedBox(height: 12),
 
           // ── BOTTOM SECTION: 3 Horizontally Aligned Columns ──
           Row(
@@ -210,11 +211,11 @@ class _BalanceCardState extends State<BalanceCard> {
                     Text(
                       'Main Balance',
                       style: AppTextStyles.labelSmall.copyWith(
-                        color: AppColors.white.withValues(alpha: 0.8),
-                        fontSize: 11,
+                        color: AppColors.white.withValues(alpha: 0.85),
+                        fontSize: 12,
                       ),
                     ),
-                    const SizedBox(height: 2),
+                    const SizedBox(height: 3),
                     AnimatedSwitcher(
                       duration: const Duration(milliseconds: 250),
                       transitionBuilder: (child, animation) =>
@@ -225,8 +226,8 @@ class _BalanceCardState extends State<BalanceCard> {
                         style: AppTextStyles.bodyLarge.copyWith(
                           color: AppColors.white,
                           fontWeight: FontWeight.bold,
-                          fontSize: 14,
-                          letterSpacing: _isVisible ? 0.2 : 2.0,
+                          fontSize: 16,
+                          letterSpacing: _isVisible ? 0.2 : 2.5,
                         ),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
@@ -248,11 +249,11 @@ class _BalanceCardState extends State<BalanceCard> {
                     Text(
                       'Entire Balance',
                       style: AppTextStyles.labelSmall.copyWith(
-                        color: AppColors.white.withValues(alpha: 0.8),
-                        fontSize: 11,
+                        color: AppColors.white.withValues(alpha: 0.85),
+                        fontSize: 12,
                       ),
                     ),
-                    const SizedBox(height: 2),
+                    const SizedBox(height: 3),
                     AnimatedSwitcher(
                       duration: const Duration(milliseconds: 250),
                       transitionBuilder: (child, animation) =>
@@ -263,8 +264,8 @@ class _BalanceCardState extends State<BalanceCard> {
                         style: AppTextStyles.bodyLarge.copyWith(
                           color: AppColors.white,
                           fontWeight: FontWeight.bold,
-                          fontSize: 14,
-                          letterSpacing: _isVisible ? 0.2 : 2.0,
+                          fontSize: 16,
+                          letterSpacing: _isVisible ? 0.2 : 2.5,
                         ),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
@@ -286,7 +287,7 @@ class _BalanceCardState extends State<BalanceCard> {
                   child: Tooltip(
                     message: _isVisible ? 'Hide Balance' : 'View Balance',
                     child: Container(
-                      padding: const EdgeInsets.all(6),
+                      padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
                         color: AppColors.white.withValues(alpha: 0.18),
                         shape: BoxShape.circle,
@@ -294,7 +295,7 @@ class _BalanceCardState extends State<BalanceCard> {
                       child: Icon(
                         _isVisible ? Iconsax.eye_slash : Iconsax.eye,
                         color: AppColors.white,
-                        size: 18,
+                        size: 20,
                       ),
                     ),
                   ),

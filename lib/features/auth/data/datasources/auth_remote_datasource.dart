@@ -1,34 +1,36 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../../../core/errors/app_exception.dart';
 import '../../../../core/networks/http_service.dart';
 import '../models/login_request_model.dart';
 import '../models/login_response_model.dart';
-import '../models/user_model.dart';
 
 /// Abstract contract for remote authentication data operations.
 abstract class AuthRemoteDataSource {
-  /// Authenticate user with phone number and PIN.
-  Future<UserModel> login(String phoneNumber, String pin);
+  /// Authenticate user using [LoginRequestModel] payload.
+  /// Returns [LoginResponseModel] representing the M-Pesa Login API response.
+  Future<LoginResponseModel> login(LoginRequestModel payload);
 
   /// Log out the current user.
   Future<void> logout();
 }
 
 /// Implementation of [AuthRemoteDataSource] that connects to the M-Pesa Login API.
+@LazySingleton(as: AuthRemoteDataSource)
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   final HttpService httpService;
 
   AuthRemoteDataSourceImpl({required this.httpService});
 
   @override
-  Future<UserModel> login(String phoneNumber, String pin) async {
+  Future<LoginResponseModel> login(LoginRequestModel payload) async {
     try {
       final response = await httpService.post(
         '/login',
-        data: LoginRequestModel(pin: pin).toJson(),
+        data: payload.toJson(),
       );
 
       final responseData = response.data;
@@ -50,7 +52,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
       if (loginResponse.success && loginResponse.data != null) {
         httpService.setAuthToken(loginResponse.data!.token);
-        return loginResponse.data!.user;
+        return loginResponse;
       }
 
       final msg = loginResponse.message.isNotEmpty ? loginResponse.message : null;

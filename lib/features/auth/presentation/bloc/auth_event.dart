@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
 
+import '../../data/models/login_request_model.dart';
+
 /// Events for the [AuthBloc].
 abstract class AuthEvent extends Equatable {
   const AuthEvent();
@@ -8,19 +10,16 @@ abstract class AuthEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-/// User requested login with phone number.
-/// Only the phone is submitted on login page; PIN is entered on pin page.
+/// User requested login with [LoginRequestModel] payload.
 class AuthLoginRequested extends AuthEvent {
-  final String phoneNumber;
-  final String pin;
+  final LoginRequestModel payload;
 
-  const AuthLoginRequested({
-    required this.phoneNumber,
-    required this.pin,
-  });
+  const AuthLoginRequested({required this.payload});
+
+  AuthLoginRequested.withPin(String pin) : payload = LoginRequestModel(pin: pin);
 
   @override
-  List<Object?> get props => [phoneNumber, pin];
+  List<Object?> get props => [payload];
 }
 
 /// User requested logout.

@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../../../core/errors/app_exception.dart';
 import '../../domain/repositories/auth_repository.dart';
@@ -9,6 +10,7 @@ import 'auth_state.dart';
 ///
 /// Lean implementation with a single [AuthStatus] enum — no separate
 /// mutation states for create/update/delete.
+@injectable
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthRepository authRepository;
 
@@ -25,15 +27,25 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     emit(state.copyWith(status: AuthStatus.loading));
 
     try {
-      final user = await authRepository.login(
-        event.phoneNumber,
-        event.pin,
-      );
-      emit(state.copyWith(
-        status: AuthStatus.success,
-        user: user,
-        message: 'Welcome back, ${user.fullName}!',
-      ));
+      final loginResponse = await authRepository.login(event.payload);
+      final user = loginResponse.data?.user;
+
+      if (loginResponse.success && user != null) {
+        emit(state.copyWith(
+          status: AuthStatus.success,
+          user: user,
+          message: loginResponse.message.isNotEmpty
+              ? loginResponse.message
+              : 'Login successful',
+        ));
+      } else {
+        emit(state.copyWith(
+          status: AuthStatus.failure,
+          message: loginResponse.message.isNotEmpty
+              ? loginResponse.message
+              : 'Authentication failed',
+        ));
+      }
     } on AppException catch (e) {
       emit(state.copyWith(
         status: AuthStatus.failure,

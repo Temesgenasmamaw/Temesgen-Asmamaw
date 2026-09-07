@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../../../core/errors/app_exception.dart';
 import '../../domain/repositories/dashboard_repository.dart';
@@ -6,6 +7,7 @@ import 'dashboard_event.dart';
 import 'dashboard_state.dart';
 
 /// BLoC managing dashboard state.
+@injectable
 class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
   final DashboardRepository dashboardRepository;
 

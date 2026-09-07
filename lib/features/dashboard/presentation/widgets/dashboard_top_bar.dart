@@ -9,12 +9,12 @@ import '../../../../core/utils/toast_utils.dart';
 /// notification icon, and more-options menu.
 class DashboardTopBar extends StatelessWidget implements PreferredSizeWidget {
   final String displayName;
-  final VoidCallback onLogout;
+  final VoidCallback? onLogout;
 
   const DashboardTopBar({
     super.key,
     required this.displayName,
-    required this.onLogout,
+    this.onLogout,
   });
 
   @override
@@ -92,7 +92,7 @@ class DashboardTopBar extends StatelessWidget implements PreferredSizeWidget {
         ],
       ),
       actions: [
-        // Notification Icon
+        // Notification Icon (Logout and 3 dots removed as requested)
         IconButton(
           icon: const Icon(
             Iconsax.notification,
@@ -103,72 +103,6 @@ class DashboardTopBar extends StatelessWidget implements PreferredSizeWidget {
           onPressed: () {
             ToastUtils.showInfo(context, 'No new notifications');
           },
-        ),
-
-        // More Options Menu (3 vertical dots)
-        PopupMenuButton<String>(
-          icon: const Icon(
-            Icons.more_vert,
-            color: Color(0xFF0A4C84),
-            size: 24,
-          ),
-          onSelected: (value) {
-            if (value == 'logout') {
-              onLogout();
-            } else if (value == 'settings') {
-              ToastUtils.showInfo(context, 'Settings');
-            } else if (value == 'help') {
-              ToastUtils.showInfo(context, 'Help & Support');
-            }
-          },
-          itemBuilder: (context) => [
-            const PopupMenuItem(
-              value: 'settings',
-              child: Row(
-                children: [
-                  Icon(
-                    Iconsax.setting_2,
-                    size: 20,
-                    color: AppColors.grey700,
-                  ),
-                  SizedBox(width: 12),
-                  Text('Settings'),
-                ],
-              ),
-            ),
-            const PopupMenuItem(
-              value: 'help',
-              child: Row(
-                children: [
-                  Icon(
-                    Iconsax.info_circle,
-                    size: 20,
-                    color: AppColors.grey700,
-                  ),
-                  SizedBox(width: 12),
-                  Text('Help & Support'),
-                ],
-              ),
-            ),
-            const PopupMenuDivider(),
-            const PopupMenuItem(
-              value: 'logout',
-              child: Row(
-                children: [
-                  Icon(
-                    Iconsax.logout,
-                    size: 20,
-                    color: AppColors.safaricomRed,
-                  ),
-                  SizedBox(width: 12),
-                  Text(
-                    'Log Out',
-                    style: TextStyle(color: AppColors.safaricomRed),
-                  ),
-                ],
-              ),
-            ),
-          ],
         ),
         const SizedBox(width: 8),
       ],

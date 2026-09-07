@@ -55,10 +55,11 @@ class _SplashPageState extends State<SplashPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.white,
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        decoration: const BoxDecoration(gradient: AppColors.headerGradient),
+        color: AppColors.white,
         child: FadeTransition(
           opacity: _fadeAnimation,
           child: ScaleTransition(
@@ -66,16 +67,16 @@ class _SplashPageState extends State<SplashPage>
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // M-PESA Logo placeholder
+                // M-PESA Logo Badge
                 Container(
-                  width: 120,
-                  height: 120,
+                  width: 110,
+                  height: 110,
                   decoration: BoxDecoration(
-                    color: AppColors.white,
+                    gradient: AppColors.primaryGradient,
                     borderRadius: BorderRadius.circular(28),
                     boxShadow: [
                       BoxShadow(
-                        color: AppColors.black.withValues(alpha: 0.15),
+                        color: AppColors.safaricomRed.withValues(alpha: 0.28),
                         blurRadius: 24,
                         offset: const Offset(0, 8),
                       ),
@@ -84,8 +85,8 @@ class _SplashPageState extends State<SplashPage>
                   child: const Center(
                     child: Icon(
                       Icons.account_balance_wallet,
-                      size: 56,
-                      color: AppColors.safaricomRed,
+                      size: 52,
+                      color: AppColors.white,
                     ),
                   ),
                 ),
@@ -93,17 +94,19 @@ class _SplashPageState extends State<SplashPage>
                 Text(
                   'M-PESA',
                   style: AppTextStyles.heading1.copyWith(
-                    color: AppColors.white,
+                    color: AppColors.safaricomRed,
                     fontSize: 36,
                     letterSpacing: 2.0,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
                 const SizedBox(height: 8),
                 Text(
                   'by Safaricom',
                   style: AppTextStyles.bodyMedium.copyWith(
-                    color: AppColors.white.withValues(alpha: 0.8),
+                    color: AppColors.grey600,
                     letterSpacing: 1.0,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
               ],

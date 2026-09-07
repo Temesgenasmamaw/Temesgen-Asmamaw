@@ -1,9 +1,12 @@
+import 'package:injectable/injectable.dart';
+
 import '../../../../core/errors/error_handler.dart';
 import '../../domain/repositories/dashboard_repository.dart';
 import '../datasources/dashboard_remote_datasource.dart';
 import '../models/transaction_model.dart';
 
 /// Concrete implementation of [DashboardRepository].
+@LazySingleton(as: DashboardRepository)
 class DashboardRepositoryImpl implements DashboardRepository {
   final DashboardRemoteDataSource remoteDataSource;
 

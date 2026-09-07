@@ -1,5 +1,7 @@
 import 'package:get_it/get_it.dart';
 
+export 'package:get_it/get_it.dart';
+
 import '../networks/http_service.dart';
 import '../../features/auth/data/datasources/auth_remote_datasource.dart';
 import '../../features/auth/data/repositories/auth_repository_impl.dart';

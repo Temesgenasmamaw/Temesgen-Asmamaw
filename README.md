@@ -95,6 +95,11 @@ final displayMessage = (msg.isNotEmpty && details != null && details.isNotEmpty)
 ```
 The exact server message (`User not found: No user was found with the provided phone number.`) is rendered in the inline red error banner and presented via toast notifications.
 
+### Typed Request Payload & Response Models
+- **Request Payload**: Handled by `LoginRequestModel` (`lib/features/auth/data/models/login_request_model.dart`), serializing `{ "pin": "..." }`.
+- **Response Model**: Handled by `LoginResponseModel` (`lib/features/auth/data/models/login_response_model.dart`), modeling `success`, `message`, `data` (with `user`, `token`, `expiresIn`), and `error` (with `code`, `details`).
+- **Clean Contracts**: Both `AuthRemoteDataSource` and `AuthRepository` send `LoginRequestModel payload` and return `Future<LoginResponseModel>`.
+
 ---
 
 ## Architecture Used & Why

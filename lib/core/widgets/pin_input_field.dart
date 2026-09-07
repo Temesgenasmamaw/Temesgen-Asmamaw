@@ -40,10 +40,10 @@ class PinInputField extends StatelessWidget {
               color: hasError
                   ? AppColors.error
                   : isActive
-                      ? AppColors.safaricomRed
-                      : isFilled
-                          ? AppColors.safaricomRed
-                          : AppColors.grey300,
+                  ? AppColors.safaricomRed
+                  : isFilled
+                  ? AppColors.safaricomRed
+                  : AppColors.grey300,
               width: isActive ? 2.0 : 1.5,
             ),
             boxShadow: isActive
@@ -145,19 +145,13 @@ class NumericKeypad extends StatelessWidget {
           width: AppSizes.numPadKeySize,
           height: AppSizes.numPadKeySize,
           alignment: Alignment.center,
-          child: Text(
-            '$number',
-            style: AppTextStyles.numPadKey,
-          ),
+          child: Text('$number', style: AppTextStyles.numPadKey),
         ),
       ),
     );
   }
 
-  Widget _buildSpecialKey({
-    required Widget child,
-    VoidCallback? onTap,
-  }) {
+  Widget _buildSpecialKey({required Widget child, VoidCallback? onTap}) {
     return Material(
       color: Colors.transparent,
       child: InkWell(
@@ -174,23 +168,6 @@ class NumericKeypad extends StatelessWidget {
   }
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// 4-DIGIT PIN INPUT – Individual input boxes with auto-focus, backspace, masking
-// ─────────────────────────────────────────────────────────────────────────────
-
-/// 4-digit PIN input with individual boxes.
-///
-/// Features:
-/// - Exactly 4 digits with individual styled input boxes
-/// - Red '|' cursor displayed on the first / active empty PIN box
-/// - Internal hollow circle removed (completely clean box when empty)
-/// - Red input character '●' when digit is entered
-/// - Red border and subtle red glow on active/filled boxes
-/// - Smooth blinking cursor animation
-/// - Automatically advances focus on digit entry
-/// - Correct backspace/delete navigation across fields
-/// - Digits only
-/// - Error styling when authentication fails
 class FourDigitPinInput extends StatefulWidget {
   final ValueChanged<String> onPinChanged;
   final ValueChanged<String>? onCompleted;
@@ -318,15 +295,15 @@ class FourDigitPinInputState extends State<FourDigitPinInput>
         color: isFilled
             ? AppColors.safaricomRed.withValues(alpha: 0.05)
             : isActive
-                ? AppColors.safaricomRed.withValues(alpha: 0.02)
-                : AppColors.grey50,
+            ? AppColors.safaricomRed.withValues(alpha: 0.02)
+            : AppColors.grey50,
         borderRadius: BorderRadius.circular(AppSizes.radiusMedium),
         border: Border.all(
           color: widget.hasError
               ? AppColors.error
               : (isActive || isFilled)
-                  ? AppColors.safaricomRed
-                  : AppColors.grey300,
+              ? AppColors.safaricomRed
+              : AppColors.grey300,
           width: (isActive || widget.hasError) ? 2.0 : 1.5,
         ),
         boxShadow: isActive
@@ -339,9 +316,7 @@ class FourDigitPinInputState extends State<FourDigitPinInput>
               ]
             : null,
       ),
-      child: Center(
-        child: _buildBoxContent(index, isFilled, isActive),
-      ),
+      child: Center(child: _buildBoxContent(index, isFilled, isActive)),
     );
   }
 
@@ -424,9 +399,7 @@ class InternationalNumericKeypad extends StatelessWidget {
             // Empty placeholder for balanced alignment
             const SizedBox(width: 70, height: 48),
             // 0 with '+'
-            _buildKey(
-              const _KeyData(digit: 0, letters: '+'),
-            ),
+            _buildKey(const _KeyData(digit: 0, letters: '+')),
             // Backspace / Delete action
             Material(
               color: Colors.transparent,

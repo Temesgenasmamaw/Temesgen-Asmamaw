@@ -33,9 +33,7 @@ class _LoginPageState extends State<LoginPage> {
 
   void _onContinue() {
     if (_pin.length == 4) {
-      context.read<AuthBloc>().add(
-        AuthLoginRequested(phoneNumber: '+251912345678', pin: _pin),
-      );
+      context.read<AuthBloc>().add(AuthLoginRequested.withPin(_pin));
     }
   }
 
@@ -80,6 +78,74 @@ class _LoginPageState extends State<LoginPage> {
 
                     return Column(
                       children: [
+                        const SizedBox(height: 12),
+
+                        // ── Profile Section: Icon and User Details in One Row ──
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            // Profile Avatar Icon
+                            Container(
+                              width: 62,
+                              height: 62,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: const Color(0xFFFDECEC),
+                                border: Border.all(
+                                  color: const Color(0xFFE28787),
+                                  width: 1.8,
+                                ),
+                              ),
+                              child: const Center(
+                                child: Icon(
+                                  Icons.person,
+                                  size: 32,
+                                  color: AppColors.softRed,
+                                ),
+                              ),
+                            ),
+
+                            const SizedBox(width: AppSizes.space16),
+
+                            // User details as one column
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(
+                                  'Welcome back',
+                                  style: AppTextStyles.bodyMedium.copyWith(
+                                    color: AppColors.grey600,
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 14,
+                                  ),
+                                ),
+                                const SizedBox(height: 2),
+                                Text(
+                                  'John Kamau',
+                                  style: AppTextStyles.heading3.copyWith(
+                                    color: AppColors.grey900,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 21,
+                                    letterSpacing: -0.2,
+                                  ),
+                                ),
+                                const SizedBox(height: 2),
+                                Text(
+                                  '+254 7** *** 678',
+                                  style: AppTextStyles.bodySmall.copyWith(
+                                    color: AppColors.grey600,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 14,
+                                    letterSpacing: 0.3,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+
                         const SizedBox(height: AppSizes.space24),
 
                         // Title
