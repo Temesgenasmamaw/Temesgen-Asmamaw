@@ -4,7 +4,6 @@ import '../constants/app_colors.dart';
 import '../constants/app_sizes.dart';
 import '../constants/app_text_styles.dart';
 
-/// Reusable grid tile for dashboard services (icon + label).
 class ServiceTile extends StatelessWidget {
   final IconData icon;
   final String label;
@@ -32,7 +31,8 @@ class ServiceTile extends StatelessWidget {
             width: 56,
             height: 56,
             decoration: BoxDecoration(
-              color: backgroundColor ??
+              color:
+                  backgroundColor ??
                   AppColors.primaryGreen.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(AppSizes.radiusMedium),
             ),

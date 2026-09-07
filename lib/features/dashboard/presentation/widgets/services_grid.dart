@@ -5,8 +5,6 @@ import '../../../../core/constants/app_colors.dart';
 import '../../../../core/utils/toast_utils.dart';
 import '../../../../core/widgets/custom_service_tile.dart';
 
-/// Services Grid with comfortable, generous spacing and a cohesive
-/// soft red palette ("red but not real red": rose-crimson #D63B48 on soft blush #FFF1F2).
 class ServicesGrid extends StatefulWidget {
   const ServicesGrid({super.key});
 
@@ -17,34 +15,18 @@ class ServicesGrid extends StatefulWidget {
 class _ServicesGridState extends State<ServicesGrid> {
   bool _isExpanded = false;
 
-  // Refined soft red ("not real red") color constants
   static const Color _softRed = AppColors.softRed;
   static const Color _softRedBg = AppColors.softRedSurface;
 
   final List<_ServiceConfig> _row1 = const [
-    _ServiceConfig(
-      title: 'Merchant\nPayment',
-      icon: Iconsax.shop,
-    ),
-    _ServiceConfig(
-      title: 'Bill\nPayment',
-      icon: Iconsax.receipt_2,
-    ),
-    _ServiceConfig(
-      title: 'Credit &\nSaving',
-      icon: Iconsax.empty_wallet,
-    ),
+    _ServiceConfig(title: 'Merchant\nPayment', icon: Iconsax.shop),
+    _ServiceConfig(title: 'Bill\nPayment', icon: Iconsax.receipt_2),
+    _ServiceConfig(title: 'Credit &\nSaving', icon: Iconsax.empty_wallet),
   ];
 
   final List<_ServiceConfig> _row2 = const [
-    _ServiceConfig(
-      title: 'Transfer\nMoney',
-      icon: Iconsax.money_send,
-    ),
-    _ServiceConfig(
-      title: 'Airtime /\nPackage',
-      icon: Iconsax.mobile,
-    ),
+    _ServiceConfig(title: 'Transfer\nMoney', icon: Iconsax.money_send),
+    _ServiceConfig(title: 'Airtime /\nPackage', icon: Iconsax.mobile),
     _ServiceConfig(
       title: 'More\nServices',
       icon: Iconsax.category,
@@ -53,18 +35,9 @@ class _ServicesGridState extends State<ServicesGrid> {
   ];
 
   final List<_ServiceConfig> _row3 = const [
-    _ServiceConfig(
-      title: 'Bank\nTransfer',
-      icon: Iconsax.bank,
-    ),
-    _ServiceConfig(
-      title: 'Cash\nOut',
-      icon: Iconsax.money_change,
-    ),
-    _ServiceConfig(
-      title: 'Exchange\nRate',
-      icon: Iconsax.convert,
-    ),
+    _ServiceConfig(title: 'Bank\nTransfer', icon: Iconsax.bank),
+    _ServiceConfig(title: 'Cash\nOut', icon: Iconsax.money_change),
+    _ServiceConfig(title: 'Exchange\nRate', icon: Iconsax.convert),
   ];
 
   @override
@@ -88,14 +61,11 @@ class _ServicesGridState extends State<ServicesGrid> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            // Row 1: Merchant Payment, Bill Payment, Credit & Saving
             _buildRow(context, _row1),
-            const SizedBox(height: 14), // Generous space between rows
+            const SizedBox(height: 14),
 
-            // Row 2: Transfer Money, Airtime/Package, More Services
             _buildRow(context, _row2),
 
-            // Optional Row 3: Bank Transfer, Cash Out, Exchange Rate (when expanded)
             if (_isExpanded) ...[
               const SizedBox(height: 14),
               _buildRow(context, _row3),

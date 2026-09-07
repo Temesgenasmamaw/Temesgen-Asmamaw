@@ -4,21 +4,8 @@ import '../constants/app_colors.dart';
 import '../constants/app_sizes.dart';
 import '../constants/app_text_styles.dart';
 
-/// Available visual variants for [CustomButton].
-enum ButtonVariant {
-  primary,
-  black,
-  outline,
-  secondary,
-}
+enum ButtonVariant { primary, black, outline, secondary }
 
-/// A highly reusable, customizable button component adhering to design standards.
-///
-/// Supports multiple visual variants:
-/// - [ButtonVariant.primary]: Safaricom Red gradient with white text.
-/// - [ButtonVariant.black]: Solid black background with crisp white text.
-/// - [ButtonVariant.outline]: Outlined border with transparent background.
-/// - [ButtonVariant.secondary]: Subtle grey surface with dark text.
 class CustomButton extends StatelessWidget {
   final String text;
   final VoidCallback? onPressed;
@@ -49,7 +36,6 @@ class CustomButton extends StatelessWidget {
     this.padding,
   });
 
-  /// Convenience constructor for a black button with white text.
   const CustomButton.black({
     super.key,
     required this.text,
@@ -62,10 +48,9 @@ class CustomButton extends StatelessWidget {
     this.suffixIcon,
     this.textColor = AppColors.white,
     this.padding,
-  })  : variant = ButtonVariant.black,
-        backgroundColor = AppColors.black;
+  }) : variant = ButtonVariant.black,
+       backgroundColor = AppColors.black;
 
-  /// Convenience constructor for an outlined button.
   const CustomButton.outline({
     super.key,
     required this.text,
@@ -109,7 +94,6 @@ class CustomButton extends StatelessWidget {
       );
     }
 
-    // Determine background color / gradient
     Gradient? gradient;
     Color? solidColor;
     Color effectiveTextColor = textColor ?? AppColors.white;

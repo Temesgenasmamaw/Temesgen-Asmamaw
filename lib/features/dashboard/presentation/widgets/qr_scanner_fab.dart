@@ -3,14 +3,10 @@ import 'package:iconsax/iconsax.dart';
 
 import '../../../../core/constants/app_colors.dart';
 
-/// Floating Action Button for QR Scanner featuring a red QR icon.
 class QrScannerFab extends StatelessWidget {
   final VoidCallback onTap;
 
-  const QrScannerFab({
-    super.key,
-    required this.onTap,
-  });
+  const QrScannerFab({super.key, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +37,7 @@ class QrScannerFab extends StatelessWidget {
             child: Icon(
               Iconsax.scan_barcode,
               size: 26,
-              color: AppColors.safaricomRed, // Red QR icon as requested
+              color: AppColors.safaricomRed,
             ),
           ),
         ),

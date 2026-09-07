@@ -5,18 +5,6 @@ import '../constants/app_colors.dart';
 import '../constants/app_sizes.dart';
 import '../constants/app_text_styles.dart';
 
-/// Redesigned M-Pesa Dashboard Balance Card.
-///
-/// Layout:
-/// - Top-left: "Main Balance" label, with balance masked (****) by default.
-/// - Top-right: "Add Money" action with plus (+) icon and text.
-/// - Divider: Horizontal line separating top and bottom sections.
-/// - Bottom section: 3 horizontally aligned columns:
-///   1. "Main Balance" label + masked value (****)
-///   2. "Entire Balance" label + masked value (****)
-///   3. "View Balance" eye/view icon vertically aligned with the columns.
-///
-/// Tapping the eye icon toggles masking/revealing of the balance values.
 class BalanceCard extends StatefulWidget {
   final double balance;
   final double? entireBalance;
@@ -40,7 +28,6 @@ class BalanceCard extends StatefulWidget {
 }
 
 class _BalanceCardState extends State<BalanceCard> {
-  // Starts hidden/masked by default as specified in requirements.
   bool _internalIsVisible = false;
 
   bool get _isVisible => widget.isBalanceVisible ?? _internalIsVisible;
@@ -89,12 +76,10 @@ class _BalanceCardState extends State<BalanceCard> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          // ── TOP SECTION: Main Balance (left) & Add Money (right) ──
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Top-left: Main Balance Label + Masked Amount
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -137,7 +122,6 @@ class _BalanceCardState extends State<BalanceCard> {
 
               const SizedBox(width: AppSizes.space12),
 
-              // Top-right: Add Money Action (+ Add Money)
               Material(
                 color: Colors.transparent,
                 child: InkWell(
@@ -188,7 +172,6 @@ class _BalanceCardState extends State<BalanceCard> {
 
           const SizedBox(height: 12),
 
-          // ── DIVIDER LINE ──
           Divider(
             color: AppColors.white.withValues(alpha: 0.25),
             height: 1,
@@ -197,11 +180,9 @@ class _BalanceCardState extends State<BalanceCard> {
 
           const SizedBox(height: 12),
 
-          // ── BOTTOM SECTION: 3 Horizontally Aligned Columns ──
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // Column 1: Main Balance
               Expanded(
                 flex: 5,
                 child: Column(
@@ -239,7 +220,6 @@ class _BalanceCardState extends State<BalanceCard> {
 
               const SizedBox(width: AppSizes.space8),
 
-              // Column 2: Entire Balance
               Expanded(
                 flex: 5,
                 child: Column(
@@ -277,8 +257,6 @@ class _BalanceCardState extends State<BalanceCard> {
 
               const SizedBox(width: AppSizes.space8),
 
-              // Column 3: View Balance (Eye Icon)
-              // Vertically aligned with Main Balance and Entire Balance columns
               Material(
                 color: Colors.transparent,
                 child: InkWell(

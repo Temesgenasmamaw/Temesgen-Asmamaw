@@ -47,7 +47,4 @@ LoginResponseError _$LoginResponseErrorFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$LoginResponseErrorToJson(LoginResponseError instance) =>
-    <String, dynamic>{
-      'code': instance.code,
-      'details': instance.details,
-    };
+    <String, dynamic>{'code': instance.code, 'details': instance.details};

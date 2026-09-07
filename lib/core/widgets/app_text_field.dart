@@ -7,7 +7,6 @@ import '../constants/app_text_styles.dart';
 
 export 'custom_input.dart';
 
-/// Styled text field with label, hint, prefix/suffix icons, and error state.
 class AppTextField extends StatelessWidget {
   final String? label;
   final String? hint;
@@ -112,7 +111,6 @@ class AppTextField extends StatelessWidget {
   }
 }
 
-/// Phone number field with +254 country code prefix.
 class PhoneTextField extends StatelessWidget {
   final TextEditingController? controller;
   final String? Function(String?)? validator;
@@ -151,15 +149,14 @@ class PhoneTextField extends StatelessWidget {
           children: [
             Text('🇰🇪', style: const TextStyle(fontSize: 20)),
             const SizedBox(width: AppSizes.space4),
-            Text('+254', style: AppTextStyles.bodyLarge.copyWith(
-              fontWeight: FontWeight.w600,
-            )),
-            const SizedBox(width: AppSizes.space8),
-            Container(
-              height: 24,
-              width: 1,
-              color: AppColors.grey300,
+            Text(
+              '+254',
+              style: AppTextStyles.bodyLarge.copyWith(
+                fontWeight: FontWeight.w600,
+              ),
             ),
+            const SizedBox(width: AppSizes.space8),
+            Container(height: 24, width: 1, color: AppColors.grey300),
           ],
         ),
       ),

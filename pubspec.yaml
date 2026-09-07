@@ -37,6 +37,9 @@ dependencies:
   intl: ^0.20.2
   iconsax: ^0.0.8
 
+  # Environment
+  flutter_dotenv: ^5.2.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -55,3 +58,5 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+    - .env
+    - .env.example

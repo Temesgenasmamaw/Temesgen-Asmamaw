@@ -4,18 +4,13 @@ import '../../features/splash/presentation/pages/splash_page.dart';
 import '../../features/auth/presentation/pages/login_page.dart';
 import '../../features/dashboard/presentation/pages/dashboard_page.dart';
 
-/// Centralized app router using GoRouter.
-///
-/// All route paths and configuration live in this single file.
 class AppRouter {
   AppRouter._();
 
-  // ── Route Path Constants ──
   static const String splash = '/';
   static const String login = '/login';
   static const String dashboard = '/dashboard';
 
-  /// The GoRouter instance for the app.
   static final GoRouter router = GoRouter(
     initialLocation: splash,
     debugLogDiagnostics: true,

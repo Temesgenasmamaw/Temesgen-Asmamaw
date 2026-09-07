@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../constants/app_colors.dart';
 import '../constants/app_text_styles.dart';
 
-/// Centralized toast / snackbar utility.
 class ToastUtils {
   ToastUtils._();
 

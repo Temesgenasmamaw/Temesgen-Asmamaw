@@ -38,7 +38,6 @@ class _SplashPageState extends State<SplashPage>
 
     _controller.forward();
 
-    // Navigate after delay.
     Future.delayed(const Duration(milliseconds: 2500), () {
       if (mounted) {
         context.go(AppRouter.login);
@@ -67,7 +66,6 @@ class _SplashPageState extends State<SplashPage>
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // M-PESA Logo Badge
                 Container(
                   width: 110,
                   height: 110,

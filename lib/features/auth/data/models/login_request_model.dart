@@ -3,9 +3,6 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'login_request_model.g.dart';
 
-/// Login request payload matching the M-Pesa Login API.
-///
-/// API expects: `{ "pin": "1111" }`
 @JsonSerializable()
 class LoginRequestModel extends Equatable {
   final String pin;

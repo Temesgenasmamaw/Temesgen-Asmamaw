@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
-/// Curved Bottom Navigation Bar for Dashboard matching the reference design.
 class DashboardBottomNav extends StatelessWidget {
   final int currentIndex;
   final ValueChanged<int> onNavItemSelected;
@@ -24,27 +23,11 @@ class DashboardBottomNav extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            _buildNavItem(
-              icon: Iconsax.home,
-              label: 'Home',
-              index: 0,
-            ),
-            _buildNavItem(
-              icon: Iconsax.receipt_2,
-              label: 'History',
-              index: 1,
-            ),
-            const SizedBox(width: 48), // Space for center docked QR button
-            _buildNavItem(
-              icon: Iconsax.wallet_2,
-              label: 'Cards',
-              index: 2,
-            ),
-            _buildNavItem(
-              icon: Iconsax.user,
-              label: 'Profile',
-              index: 3,
-            ),
+            _buildNavItem(icon: Iconsax.home, label: 'Home', index: 0),
+            _buildNavItem(icon: Iconsax.receipt_2, label: 'History', index: 1),
+            const SizedBox(width: 48),
+            _buildNavItem(icon: Iconsax.wallet_2, label: 'Cards', index: 2),
+            _buildNavItem(icon: Iconsax.user, label: 'Profile', index: 3),
           ],
         ),
       ),
@@ -90,14 +73,10 @@ class DashboardBottomNav extends StatelessWidget {
   }
 }
 
-/// Circular Floating QR Scanner Button docked into the bottom navigation bar.
 class FloatingQrScannerButton extends StatelessWidget {
   final VoidCallback onTap;
 
-  const FloatingQrScannerButton({
-    super.key,
-    required this.onTap,
-  });
+  const FloatingQrScannerButton({super.key, required this.onTap});
 
   @override
   Widget build(BuildContext context) {

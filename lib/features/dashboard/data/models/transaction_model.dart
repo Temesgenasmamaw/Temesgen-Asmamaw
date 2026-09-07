@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
 
-/// Transaction model for dashboard.
 class TransactionModel extends Equatable {
   final String id;
   final String type;

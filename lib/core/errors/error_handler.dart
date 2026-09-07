@@ -5,15 +5,9 @@ import 'package:dio/dio.dart';
 
 import 'app_exception.dart';
 
-/// Centralized error handler that transforms raw exceptions
-/// into domain-friendly [AppException] subtypes.
 class ErrorHandler {
   ErrorHandler._();
 
-  /// Transforms any caught error into an appropriate [AppException].
-  ///
-  /// [error] – the raw exception from network / datasource layer.
-  /// [fallbackMessage] – shown when the error type is unrecognized.
   static AppException handle(dynamic error, String fallbackMessage) {
     if (error is AppException) return error;
 
@@ -68,7 +62,6 @@ class ErrorHandler {
           } catch (_) {}
         }
 
-        // Extract server message directly from API response
         String serverMessage = fallbackMessage;
         if (data != null) {
           final msg = data['message'] as String?;
@@ -80,7 +73,10 @@ class ErrorHandler {
             details = err;
           }
 
-          if (msg != null && msg.isNotEmpty && details != null && details.isNotEmpty) {
+          if (msg != null &&
+              msg.isNotEmpty &&
+              details != null &&
+              details.isNotEmpty) {
             serverMessage = '$msg: $details';
           } else if (msg != null && msg.isNotEmpty) {
             serverMessage = msg;
@@ -93,10 +89,7 @@ class ErrorHandler {
           return UnauthorizedException(message: serverMessage);
         }
 
-        return ServerException(
-          message: serverMessage,
-          statusCode: statusCode,
-        );
+        return ServerException(message: serverMessage, statusCode: statusCode);
 
       case DioExceptionType.cancel:
         return const AppException(

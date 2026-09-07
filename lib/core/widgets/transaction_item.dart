@@ -5,7 +5,6 @@ import '../constants/app_colors.dart';
 import '../constants/app_sizes.dart';
 import '../constants/app_text_styles.dart';
 
-/// Transaction list item displaying icon, title, subtitle, amount, and time.
 class TransactionItem extends StatelessWidget {
   final String title;
   final String subtitle;
@@ -42,7 +41,6 @@ class TransactionItem extends StatelessWidget {
         ),
         child: Row(
           children: [
-            // Transaction icon
             Container(
               width: 44,
               height: 44,
@@ -59,7 +57,7 @@ class TransactionItem extends StatelessWidget {
               ),
             ),
             const SizedBox(width: AppSizes.space12),
-            // Title & subtitle
+
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -81,15 +79,13 @@ class TransactionItem extends StatelessWidget {
               ),
             ),
             const SizedBox(width: AppSizes.space8),
-            // Amount & date
+
             Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
                   '$amountPrefix KSh ${amount.toStringAsFixed(0)}',
-                  style: AppTextStyles.labelLarge.copyWith(
-                    color: amountColor,
-                  ),
+                  style: AppTextStyles.labelLarge.copyWith(color: amountColor),
                 ),
                 const SizedBox(height: 2),
                 Text(

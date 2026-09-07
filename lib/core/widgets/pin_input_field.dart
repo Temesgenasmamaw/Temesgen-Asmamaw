@@ -5,7 +5,6 @@ import '../constants/app_colors.dart';
 import '../constants/app_sizes.dart';
 import '../constants/app_text_styles.dart';
 
-/// PIN input field with animated dot indicators and custom numeric keypad.
 class PinInputField extends StatelessWidget {
   final int pinLength;
   final int currentLength;
@@ -74,7 +73,6 @@ class PinInputField extends StatelessWidget {
   }
 }
 
-/// Custom numeric keypad for PIN entry.
 class NumericKeypad extends StatelessWidget {
   final ValueChanged<int> onNumberTap;
   final VoidCallback onDeleteTap;
@@ -100,7 +98,6 @@ class NumericKeypad extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            // Biometric / empty
             _buildSpecialKey(
               child: onBiometricTap != null
                   ? const Icon(
@@ -112,7 +109,7 @@ class NumericKeypad extends StatelessWidget {
               onTap: onBiometricTap,
             ),
             _buildNumberKey(0),
-            // Delete
+
             _buildSpecialKey(
               child: const Icon(
                 Icons.backspace_outlined,
@@ -211,13 +208,10 @@ class FourDigitPinInputState extends State<FourDigitPinInput>
     super.dispose();
   }
 
-  /// Current 4-digit PIN string.
   String get pin => _digits.where((d) => d.isNotEmpty).join();
 
-  /// Current number of entered digits.
   int get currentLength => pin.length;
 
-  /// Clears all 4 fields and resets active cursor to the first field.
   void clear() {
     for (int i = 0; i < 4; i++) {
       _digits[i] = '';
@@ -226,7 +220,6 @@ class FourDigitPinInputState extends State<FourDigitPinInput>
     if (mounted) setState(() {});
   }
 
-  /// Append a digit entered via the custom keypad.
   void appendDigit(int digit) {
     if (!widget.enabled) return;
     for (int i = 0; i < 4; i++) {
@@ -243,7 +236,6 @@ class FourDigitPinInputState extends State<FourDigitPinInput>
     }
   }
 
-  /// Delete the last entered digit.
   void deleteDigit() {
     if (!widget.enabled) return;
     for (int i = 3; i >= 0; i--) {
@@ -332,7 +324,6 @@ class FourDigitPinInputState extends State<FourDigitPinInput>
 
   Widget _buildBoxContent(int index, bool isFilled, bool isActive) {
     if (isFilled) {
-      // 1. Entered input – RED color as requested
       return const Text(
         '●',
         style: TextStyle(
@@ -342,7 +333,6 @@ class FourDigitPinInputState extends State<FourDigitPinInput>
         ),
       );
     } else if (isActive) {
-      // 2. Active empty input – RED '|' cursor as requested
       return FadeTransition(
         opacity: _cursorOpacity,
         child: const Text(
@@ -356,18 +346,11 @@ class FourDigitPinInputState extends State<FourDigitPinInput>
         ),
       );
     }
-    // 3. Inactive empty input – NO internal circle (completely clean)
+
     return const SizedBox.shrink();
   }
 }
 
-/// International standard numeric keypad for PIN entry.
-///
-/// Layout:
-/// - Row 1: 1, 2 (ABC), 3 (DEF)
-/// - Row 2: 4 (GHI), 5 (JKL), 6 (MNO)
-/// - Row 3: 7 (PQRS), 8 (TUV), 9 (WXYZ)
-/// - Row 4: [Empty], 0 (+), [Backspace]
 class InternationalNumericKeypad extends StatelessWidget {
   final ValueChanged<int> onNumberTap;
   final VoidCallback onDeleteTap;
@@ -406,11 +389,10 @@ class InternationalNumericKeypad extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            // Empty placeholder for balanced alignment
             const SizedBox(width: 70, height: 48),
-            // 0 with '+'
+
             _buildKey(const _KeyData(digit: 0, letters: '+')),
-            // Backspace / Delete action
+
             Material(
               color: Colors.transparent,
               child: InkWell(

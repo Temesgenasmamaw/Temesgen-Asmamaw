@@ -5,14 +5,6 @@ import '../constants/app_colors.dart';
 import '../constants/app_sizes.dart';
 import '../constants/app_text_styles.dart';
 
-/// A reusable, customizable text input component.
-///
-/// Features:
-/// - Floating or header label
-/// - Optional prefix and suffix icons
-/// - Built-in password obscure/reveal toggle
-/// - Comprehensive validation and error styling
-/// - Responsive focus borders with brand accent colors
 class CustomInput extends StatefulWidget {
   final String? label;
   final String? hintText;
@@ -96,7 +88,9 @@ class _CustomInputState extends State<CustomInput> {
           validator: widget.validator,
           decoration: InputDecoration(
             hintText: widget.hintText,
-            hintStyle: AppTextStyles.bodyMedium.copyWith(color: AppColors.grey400),
+            hintStyle: AppTextStyles.bodyMedium.copyWith(
+              color: AppColors.grey400,
+            ),
             errorText: widget.errorText,
             filled: true,
             fillColor: widget.enabled ? AppColors.white : AppColors.grey100,
@@ -105,11 +99,7 @@ class _CustomInputState extends State<CustomInput> {
               vertical: AppSizes.space14,
             ),
             prefixIcon: widget.prefixIcon != null
-                ? Icon(
-                    widget.prefixIcon,
-                    size: 20,
-                    color: AppColors.grey600,
-                  )
+                ? Icon(widget.prefixIcon, size: 20, color: AppColors.grey600)
                 : null,
             suffixIcon: widget.isPassword
                 ? IconButton(
@@ -142,10 +132,7 @@ class _CustomInputState extends State<CustomInput> {
             ),
             focusedErrorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(AppSizes.radiusMedium),
-              borderSide: const BorderSide(
-                color: AppColors.error,
-                width: 1.8,
-              ),
+              borderSide: const BorderSide(color: AppColors.error, width: 1.8),
             ),
           ),
         ),

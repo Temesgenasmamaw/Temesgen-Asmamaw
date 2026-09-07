@@ -15,7 +15,6 @@ import '../widgets/qr_scanner_fab.dart';
 import '../widgets/recent_transactions_section.dart';
 import '../widgets/services_grid.dart';
 
-/// Clean Dashboard Page assembling feature presentation widgets.
 class DashboardPage extends StatelessWidget {
   const DashboardPage({super.key});
 
@@ -37,7 +36,7 @@ class DashboardPage extends StatelessWidget {
 
         return Scaffold(
           backgroundColor: AppColors.scaffoldBackground,
-          // ── Top Bar Widget ──
+
           appBar: DashboardTopBar(
             displayName: displayName,
             onLogout: () {
@@ -45,7 +44,6 @@ class DashboardPage extends StatelessWidget {
             },
           ),
 
-          // ── Floating QR Scanner Button (Red Icon, No Bottom Nav) ──
           floatingActionButton: QrScannerFab(
             onTap: () {
               ToastUtils.showInfo(context, 'QR Scanner activated');
@@ -53,7 +51,6 @@ class DashboardPage extends StatelessWidget {
           ),
           floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
 
-          // ── Dashboard Body ──
           body: SingleChildScrollView(
             padding: const EdgeInsets.fromLTRB(
               AppSizes.space16,
@@ -64,7 +61,6 @@ class DashboardPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                // 1. Balance Card (with Black Add Money Button)
                 BalanceCard(
                   balance: balance,
                   entireBalance: balance,
@@ -79,12 +75,10 @@ class DashboardPage extends StatelessWidget {
 
                 const SizedBox(height: 14),
 
-                // 2. Services Grid (Spacious, Soft Red Icons)
                 const ServicesGrid(),
 
                 const SizedBox(height: 16),
 
-                // 3. Recent Transactions Section
                 const RecentTransactionsSection(),
 
                 const SizedBox(height: AppSizes.space16),

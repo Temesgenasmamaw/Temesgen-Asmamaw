@@ -3,11 +3,9 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'app_colors.dart';
 
-/// Centralized typography system using Google Fonts (Poppins).
 class AppTextStyles {
   AppTextStyles._();
 
-  // ── Headings ──
   static TextStyle heading1 = GoogleFonts.poppins(
     fontSize: 28,
     fontWeight: FontWeight.w700,
@@ -36,7 +34,6 @@ class AppTextStyles {
     height: 1.3,
   );
 
-  // ── Body ──
   static TextStyle bodyLarge = GoogleFonts.poppins(
     fontSize: 16,
     fontWeight: FontWeight.w400,
@@ -58,7 +55,6 @@ class AppTextStyles {
     height: 1.5,
   );
 
-  // ── Labels ──
   static TextStyle labelLarge = GoogleFonts.poppins(
     fontSize: 14,
     fontWeight: FontWeight.w600,
@@ -80,7 +76,6 @@ class AppTextStyles {
     height: 1.4,
   );
 
-  // ── Button ──
   static TextStyle button = GoogleFonts.poppins(
     fontSize: 16,
     fontWeight: FontWeight.w600,
@@ -95,7 +90,6 @@ class AppTextStyles {
     height: 1.2,
   );
 
-  // ── Special ──
   static TextStyle balance = GoogleFonts.poppins(
     fontSize: 32,
     fontWeight: FontWeight.w700,

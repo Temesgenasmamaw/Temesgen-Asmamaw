@@ -7,32 +7,6 @@ import 'user_model.dart';
 
 part 'login_response_model.g.dart';
 
-/// Full API response wrapper for the M-Pesa Login endpoint.
-///
-/// Successful response shape:
-/// ```json
-/// {
-///   "success": true,
-///   "message": "Login successful",
-///   "data": {
-///     "user": { ... },
-///     "token": "mock_access_token_123456",
-///     "expiresIn": 3600
-///   }
-/// }
-/// ```
-///
-/// Error response shape:
-/// ```json
-/// {
-///   "success": false,
-///   "message": "User not found",
-///   "error": {
-///     "code": "USER_NOT_FOUND",
-///     "details": "No user was found with the provided phone number."
-///   }
-/// }
-/// ```
 @JsonSerializable(explicitToJson: true)
 class LoginResponseModel extends Equatable {
   final bool success;
@@ -50,7 +24,6 @@ class LoginResponseModel extends Equatable {
   factory LoginResponseModel.fromJson(Map<String, dynamic> json) =>
       _$LoginResponseModelFromJson(json);
 
-  /// Helper factory to safely parse dynamic Dio response data (Map or String JSON).
   factory LoginResponseModel.fromDynamic(dynamic json) {
     if (json is Map<String, dynamic>) {
       return LoginResponseModel.fromJson(json);
@@ -80,7 +53,6 @@ class LoginResponseModel extends Equatable {
   List<Object?> get props => [success, message, data, error];
 }
 
-/// Nested `data` object containing user, token, and expiry.
 @JsonSerializable(explicitToJson: true)
 class LoginResponseData extends Equatable {
   final UserModel user;
@@ -102,16 +74,12 @@ class LoginResponseData extends Equatable {
   List<Object?> get props => [user, token, expiresIn];
 }
 
-/// Nested `error` object returned on failed login.
 @JsonSerializable()
 class LoginResponseError extends Equatable {
   final String code;
   final String details;
 
-  const LoginResponseError({
-    this.code = '',
-    this.details = '',
-  });
+  const LoginResponseError({this.code = '', this.details = ''});
 
   factory LoginResponseError.fromJson(Map<String, dynamic> json) =>
       _$LoginResponseErrorFromJson(json);

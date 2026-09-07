@@ -14,7 +14,6 @@ void main() {
     expect(find.text('M-PESA'), findsWidgets);
     expect(find.text('by Safaricom'), findsWidgets);
 
-    // Fast-forward splash timer and pump a few frames for login screen
     await tester.pump(const Duration(seconds: 3));
     await tester.pump(const Duration(milliseconds: 100));
 
@@ -23,4 +22,3 @@ void main() {
     expect(find.text('Enter your PIN'), findsOneWidget);
   });
 }
-

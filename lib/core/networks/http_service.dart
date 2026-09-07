@@ -53,7 +53,6 @@ class HttpService {
     );
   }
 
-  // GET
   Future<Response> get(
     String url, {
     Map<String, dynamic>? params,
@@ -66,7 +65,6 @@ class HttpService {
     );
   }
 
-  // POST
   Future<Response> post(
     String url, {
     dynamic data,
@@ -81,7 +79,6 @@ class HttpService {
     );
   }
 
-  // PUT
   Future<Response> put(
     String url, {
     dynamic data,
@@ -96,7 +93,6 @@ class HttpService {
     );
   }
 
-  // DELETE
   Future<Response> delete(
     String url, {
     dynamic data,
@@ -111,12 +107,10 @@ class HttpService {
     );
   }
 
-  /// Inject an auth token for subsequent requests.
   void setAuthToken(String token) {
     dio.options.headers['Authorization'] = 'Bearer $token';
   }
 
-  /// Remove auth token (e.g. on logout).
   void clearAuthToken() {
     dio.options.headers.remove('Authorization');
   }

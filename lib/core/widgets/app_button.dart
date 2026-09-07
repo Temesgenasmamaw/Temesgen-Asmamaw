@@ -6,9 +6,6 @@ import '../constants/app_text_styles.dart';
 
 export 'custom_button.dart';
 
-/// Reusable primary action button with loading state.
-///
-/// Supports primary (filled gradient), secondary, and outline variants.
 class AppButton extends StatelessWidget {
   final String text;
   final VoidCallback? onPressed;

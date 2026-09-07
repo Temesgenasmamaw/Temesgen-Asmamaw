@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../constants/app_colors.dart';
 
-/// Reusable service action tile for dashboard grids and menus.
-///
-/// Designed with generous spacing, soft touch feedback, and clear typography.
 class CustomServiceTile extends StatelessWidget {
   final String title;
   final IconData icon;

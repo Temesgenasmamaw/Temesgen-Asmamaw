@@ -2,13 +2,11 @@ import 'package:injectable/injectable.dart';
 
 import '../models/transaction_model.dart';
 
-/// Abstract contract for dashboard remote data operations.
 abstract class DashboardRemoteDataSource {
   Future<double> getBalance();
   Future<List<TransactionModel>> getRecentTransactions();
 }
 
-/// Mock implementation with sample data.
 @LazySingleton(as: DashboardRemoteDataSource)
 class DashboardRemoteDataSourceImpl implements DashboardRemoteDataSource {
   @override

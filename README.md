@@ -180,7 +180,12 @@ During the development of this application, **Google DeepMind Antigravity** AI a
    cd mobile_wallet
    ```
 
-2. **Install Dependencies**:
+2. **Configure Environment Variables**:
+   ```bash
+   cp .env.example .env
+   ```
+
+3. **Install Dependencies**:
    ```bash
    flutter pub get
    ```

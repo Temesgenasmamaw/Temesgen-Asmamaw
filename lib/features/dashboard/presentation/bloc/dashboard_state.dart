@@ -2,10 +2,8 @@ import 'package:equatable/equatable.dart';
 
 import '../../data/models/transaction_model.dart';
 
-/// Unified status enum for dashboard.
 enum DashboardStatus { initial, loading, success, failure }
 
-/// State for [DashboardBloc].
 class DashboardState extends Equatable {
   final DashboardStatus status;
   final double balance;

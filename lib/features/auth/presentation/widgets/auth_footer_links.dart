@@ -5,7 +5,6 @@ import '../../../../core/constants/app_sizes.dart';
 import '../../../../core/constants/app_text_styles.dart';
 import '../../../../core/utils/toast_utils.dart';
 
-/// Footer Links for Login Page: Forgot PIN (red), Contact Us, and Terms.
 class AuthFooterLinks extends StatelessWidget {
   const AuthFooterLinks({super.key});
 
@@ -14,17 +13,12 @@ class AuthFooterLinks extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        _buildLink(
-          context,
-          'Forgot PIN',
-          () {
-            ToastUtils.showInfo(
-              context,
-              'Forgot PIN: Dial *777# or visit your nearest branch',
-            );
-          },
-          color: AppColors.safaricomRed,
-        ),
+        _buildLink(context, 'Forgot PIN', () {
+          ToastUtils.showInfo(
+            context,
+            'Forgot PIN: Dial *777# or visit your nearest branch',
+          );
+        }, color: AppColors.safaricomRed),
         _buildDivider(),
         _buildLink(context, 'Contact Us', () {
           ToastUtils.showInfo(

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_sizes.dart';
 import '../../../../core/constants/app_text_styles.dart';
+import 'red_diagonal_stripes_background.dart';
 
 class AuthHeaderSection extends StatelessWidget {
   final String selectedLanguage;
@@ -36,12 +37,8 @@ class AuthHeaderSection extends StatelessWidget {
         decoration: const BoxDecoration(color: AppColors.safaricomRed),
         child: Stack(
           children: [
-            // ── 1. Pure Canvas Red Diagonal Stripes (Renders instantly without asset/network dependency) ──
-            const Positioned.fill(
-              child: CustomPaint(painter: RedDiagonalStripesPainter()),
-            ),
+            const Positioned.fill(child: RedDiagonalStripesBackground()),
 
-            // ── 2. Asset Image Overlay (Blends seamlessly if asset bundle is loaded) ──
             Positioned.fill(
               child: Image.asset(
                 'assets/images/red_header.png',
@@ -51,7 +48,6 @@ class AuthHeaderSection extends StatelessWidget {
               ),
             ),
 
-            // ── 3. Top Bar: Language Selector (Left Side Only) ──
             Positioned(
               top: topPadding + 10,
               left: 20,
@@ -110,7 +106,6 @@ class AuthHeaderSection extends StatelessWidget {
               ),
             ),
 
-            // ── 4. Profile Section: Pure Avatar & Text directly on top of Image (No borders/box) ──
             Positioned(
               bottom: 22,
               left: 20,
@@ -119,7 +114,6 @@ class AuthHeaderSection extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  // Profile Avatar Icon
                   Container(
                     width: 60,
                     height: 60,
@@ -138,7 +132,6 @@ class AuthHeaderSection extends StatelessWidget {
 
                   const SizedBox(width: AppSizes.space16),
 
-                  // User details column directly on top of image
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
@@ -181,54 +174,4 @@ class AuthHeaderSection extends StatelessWidget {
       ),
     );
   }
-}
-
-/// Custom painter that renders the authentic Safaricom Red diagonal stripes.
-/// Renders 100% on the Flutter canvas without asset bundle or network dependency,
-/// guaranteeing the red background appears immediately on hot reload.
-class RedDiagonalStripesPainter extends CustomPainter {
-  final Color primaryColor;
-  final Color stripeColor;
-  final double stripeWidth;
-  final double stripeSpacing;
-
-  const RedDiagonalStripesPainter({
-    this.primaryColor = const Color(0xFFE31937),
-    this.stripeColor = const Color(0xFFC7132B),
-    this.stripeWidth = 22.0,
-    this.stripeSpacing = 22.0,
-  });
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    // 1. Draw solid primary red base
-    final bgPaint = Paint()..color = primaryColor;
-    canvas.drawRect(Offset.zero & size, bgPaint);
-
-    // 2. Draw diagonal stripes from top-left to bottom-right (45 degrees)
-    final stripePaint = Paint()
-      ..color = stripeColor
-      ..strokeWidth = stripeWidth
-      ..style = PaintingStyle.stroke;
-
-    final totalStep = stripeWidth + stripeSpacing;
-    canvas.save();
-    canvas.clipRect(Offset.zero & size);
-
-    final start = -size.height * 2;
-    final end = size.width + size.height * 2;
-
-    for (double x = start; x < end; x += totalStep) {
-      canvas.drawLine(
-        Offset(x, -20),
-        Offset(x + size.height + 40, size.height + 20),
-        stripePaint,
-      );
-    }
-
-    canvas.restore();
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }

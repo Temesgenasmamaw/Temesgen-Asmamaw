@@ -5,7 +5,6 @@ import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_sizes.dart';
 import '../../../../core/utils/toast_utils.dart';
 
-/// Recent Transactions list section matching the reference design.
 class RecentTransactionsSection extends StatelessWidget {
   const RecentTransactionsSection({super.key});
 
@@ -14,7 +13,6 @@ class RecentTransactionsSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Section Header
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -59,7 +57,6 @@ class RecentTransactionsSection extends StatelessWidget {
 
         const SizedBox(height: 8),
 
-        // Transactions List
         _buildTransactionRow(
           context,
           title: 'ATM Cash Withdrawal',

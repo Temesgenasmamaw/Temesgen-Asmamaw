@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import '../constants/app_colors.dart';
 import '../constants/app_sizes.dart';
 
-/// A reusable elevated card component with customizable border radius,
-/// background gradient or solid color, and subtle shadow elevation.
 class CustomCard extends StatelessWidget {
   final Widget child;
   final EdgeInsetsGeometry? padding;
@@ -41,7 +39,8 @@ class CustomCard extends StatelessWidget {
         gradient: gradient,
         borderRadius: radius,
         border: border,
-        boxShadow: shadows ??
+        boxShadow:
+            shadows ??
             [
               BoxShadow(
                 color: Colors.black.withValues(alpha: 0.04),
@@ -56,11 +55,7 @@ class CustomCard extends StatelessWidget {
     if (onTap != null) {
       content = Material(
         color: Colors.transparent,
-        child: InkWell(
-          onTap: onTap,
-          borderRadius: radius,
-          child: content,
-        ),
+        child: InkWell(onTap: onTap, borderRadius: radius, child: content),
       );
     }
 

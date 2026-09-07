@@ -5,17 +5,11 @@ import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_sizes.dart';
 import '../../../../core/utils/toast_utils.dart';
 
-/// Top AppBar for the Dashboard showing user avatar, greeting, name,
-/// notification icon, and more-options menu.
 class DashboardTopBar extends StatelessWidget implements PreferredSizeWidget {
   final String displayName;
   final VoidCallback? onLogout;
 
-  const DashboardTopBar({
-    super.key,
-    required this.displayName,
-    this.onLogout,
-  });
+  const DashboardTopBar({super.key, required this.displayName, this.onLogout});
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
@@ -41,7 +35,6 @@ class DashboardTopBar extends StatelessWidget implements PreferredSizeWidget {
       toolbarHeight: kToolbarHeight,
       title: Row(
         children: [
-          // Initials Box Avatar (e.g. "AB")
           Container(
             width: 38,
             height: 38,
@@ -63,7 +56,6 @@ class DashboardTopBar extends StatelessWidget implements PreferredSizeWidget {
 
           const SizedBox(width: AppSizes.space12),
 
-          // Greeting & Name ("Selam," in yellow, Name in deep blue)
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
@@ -92,7 +84,6 @@ class DashboardTopBar extends StatelessWidget implements PreferredSizeWidget {
         ],
       ),
       actions: [
-        // Notification Icon (Logout and 3 dots removed as requested)
         IconButton(
           icon: const Icon(
             Iconsax.notification,
