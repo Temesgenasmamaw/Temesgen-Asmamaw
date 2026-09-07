@@ -292,7 +292,9 @@ class FourDigitPinInputState extends State<FourDigitPinInput>
       width: 56,
       height: 56,
       decoration: BoxDecoration(
-        color: isFilled
+        color: widget.hasError
+            ? AppColors.error.withValues(alpha: 0.05)
+            : isFilled
             ? AppColors.safaricomRed.withValues(alpha: 0.05)
             : isActive
             ? AppColors.safaricomRed.withValues(alpha: 0.02)
@@ -306,7 +308,15 @@ class FourDigitPinInputState extends State<FourDigitPinInput>
               : AppColors.grey300,
           width: (isActive || widget.hasError) ? 2.0 : 1.5,
         ),
-        boxShadow: isActive
+        boxShadow: widget.hasError
+            ? [
+                BoxShadow(
+                  color: AppColors.error.withValues(alpha: 0.2),
+                  blurRadius: 8,
+                  spreadRadius: 1,
+                ),
+              ]
+            : isActive
             ? [
                 BoxShadow(
                   color: AppColors.safaricomRed.withValues(alpha: 0.18),

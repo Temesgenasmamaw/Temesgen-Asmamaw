@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -47,6 +49,30 @@ class LoginResponseModel extends Equatable {
 
   factory LoginResponseModel.fromJson(Map<String, dynamic> json) =>
       _$LoginResponseModelFromJson(json);
+
+  /// Helper factory to safely parse dynamic Dio response data (Map or String JSON).
+  factory LoginResponseModel.fromDynamic(dynamic json) {
+    if (json is Map<String, dynamic>) {
+      return LoginResponseModel.fromJson(json);
+    } else if (json is Map) {
+      return LoginResponseModel.fromJson(Map<String, dynamic>.from(json));
+    } else if (json is String && json.isNotEmpty) {
+      try {
+        final decoded = jsonDecode(json);
+        if (decoded is Map<String, dynamic>) {
+          return LoginResponseModel.fromJson(decoded);
+        } else if (decoded is Map) {
+          return LoginResponseModel.fromJson(
+            Map<String, dynamic>.from(decoded),
+          );
+        }
+      } catch (_) {}
+    }
+    return const LoginResponseModel(
+      success: false,
+      message: 'Invalid response format received.',
+    );
+  }
 
   Map<String, dynamic> toJson() => _$LoginResponseModelToJson(this);
 

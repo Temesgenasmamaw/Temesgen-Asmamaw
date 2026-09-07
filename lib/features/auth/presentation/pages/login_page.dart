@@ -78,75 +78,7 @@ class _LoginPageState extends State<LoginPage> {
 
                     return Column(
                       children: [
-                        const SizedBox(height: 12),
-
-                        // ── Profile Section: Icon and User Details in One Row ──
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            // Profile Avatar Icon
-                            Container(
-                              width: 62,
-                              height: 62,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: const Color(0xFFFDECEC),
-                                border: Border.all(
-                                  color: const Color(0xFFE28787),
-                                  width: 1.8,
-                                ),
-                              ),
-                              child: const Center(
-                                child: Icon(
-                                  Icons.person,
-                                  size: 32,
-                                  color: AppColors.softRed,
-                                ),
-                              ),
-                            ),
-
-                            const SizedBox(width: AppSizes.space16),
-
-                            // User details as one column
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Text(
-                                  'Welcome back',
-                                  style: AppTextStyles.bodyMedium.copyWith(
-                                    color: AppColors.grey600,
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 14,
-                                  ),
-                                ),
-                                const SizedBox(height: 2),
-                                Text(
-                                  'John Kamau',
-                                  style: AppTextStyles.heading3.copyWith(
-                                    color: AppColors.grey900,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 21,
-                                    letterSpacing: -0.2,
-                                  ),
-                                ),
-                                const SizedBox(height: 2),
-                                Text(
-                                  '+254 7** *** 678',
-                                  style: AppTextStyles.bodySmall.copyWith(
-                                    color: AppColors.grey600,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 14,
-                                    letterSpacing: 0.3,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-
-                        const SizedBox(height: AppSizes.space24),
+                        const SizedBox(height: AppSizes.space20),
 
                         // Title
                         Text(
@@ -157,7 +89,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
 
-                        const SizedBox(height: AppSizes.space24),
+                        const SizedBox(height: AppSizes.space20),
 
                         // 4-digit PIN input
                         FourDigitPinInput(
@@ -178,33 +110,22 @@ class _LoginPageState extends State<LoginPage> {
                           },
                         ),
 
-                        // Error message on incorrect PIN
+                        // Inline error message on incorrect PIN
                         if (hasError) ...[
                           const SizedBox(height: AppSizes.space12),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Icon(
-                                Icons.error_outline,
-                                size: 16,
-                                color: AppColors.error,
-                              ),
-                              const SizedBox(width: 6),
-                              Flexible(
-                                child: Text(
-                                  state.message ?? '',
-                                  textAlign: TextAlign.center,
-                                  style: AppTextStyles.bodySmall.copyWith(
-                                    color: AppColors.error,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                              ),
-                            ],
+                          Text(
+                            'Incorrect PIN. Please try again.',
+                            textAlign: TextAlign.center,
+                            style: AppTextStyles.bodyMedium.copyWith(
+                              color: AppColors.error,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 14,
+                            ),
                           ),
+                          const SizedBox(height: AppSizes.space12),
+                        ] else ...[
+                          const SizedBox(height: AppSizes.space20),
                         ],
-
-                        const SizedBox(height: AppSizes.space16),
 
                         // International Numeric Keypad (123 / 456 / 789 / 0 + back)
                         InternationalNumericKeypad(
