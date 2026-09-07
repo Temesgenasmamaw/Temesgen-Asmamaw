@@ -1,6 +1,5 @@
 import 'package:injectable/injectable.dart';
 
-import '../../../../core/errors/app_exception.dart';
 import '../../../../core/errors/error_handler.dart';
 import '../../domain/repositories/auth_repository.dart';
 import '../datasources/auth_remote_datasource.dart';
